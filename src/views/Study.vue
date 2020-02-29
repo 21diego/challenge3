@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="study">
     <Userbar></Userbar>
     <Navbar></Navbar>
   </div>
@@ -11,7 +11,7 @@ import Userbar from '@/components/Userbar.vue'
 import Navbar from '@/components/Navbar.vue'
 
 export default {
-  name: 'Home',
+  name: 'Study',
   components: {
     Userbar, Navbar
   }
