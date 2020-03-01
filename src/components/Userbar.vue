@@ -34,7 +34,6 @@ import {mapState} from 'vuex'
 
 <style scoped>
 #contenedor {
-  margin-top: 20px;
   height: 70px;
   background-color: rgb(96, 252, 179);
 }

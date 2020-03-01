@@ -8,6 +8,7 @@ export default new Vuex.Store({
     registro:{
       account: false
     },
+    categ: "",
     user:{
       id: '',
       name:'',
@@ -31,6 +32,9 @@ export default new Vuex.Store({
       for(let element in database){
         state[element] = database[element];
       };
+    },
+    saveCat(state,cat){
+      state.categ = cat;
     }
   },
   actions: {

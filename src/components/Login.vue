@@ -78,9 +78,11 @@ export default {
       app.auth().signInWithPopup(provider)
       .then(data => {
         let id = data.user.uid;
-        if(this.Usuarios && this.Usuarios.id){
-          this.charge(this.Usuarios.id);
+        if(this.Usuarios != null && this.Usuarios[id] != null){
+          console.log("carga de datos")
+          this.charge(this.Usuarios[id]);
         }else{
+          console.log("se creo de nuevo")
           this.create(data.user);
         }
         this.$router.push({path: '/'}).catch(err => {});
