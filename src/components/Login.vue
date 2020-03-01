@@ -68,12 +68,21 @@ export default {
       error: null
     };
   },
+  computed:{
+    ...mapState(['Usuarios'])
+  },
   methods: {
+    ...mapMutations(['charge']),
     google(){
       let provider = new firebase.auth.GoogleAuthProvider();
       app.auth().signInWithPopup(provider)
       .then(data => {
-        console.log(data.user);
+        let id = data.user.uid;
+        if(this.Usuarios && this.Usuarios.id){
+          this.charge(this.Usuarios.id);
+        }else{
+          this.create(data.user);
+        }
         this.$router.push({path: '/'}).catch(err => {});
       })
       .catch(err => {
@@ -83,17 +92,28 @@ export default {
     mail() {    
       app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
       .then(data => {
-        this.getUser(data.user);
+        
+        this.create(data.user)
         this.$router.push({path: '/'}).catch(err => {});
       })
       .catch(err => {
         this.error = err.message;
       });
     },
-    getUser(usr){
-      console.log(usr);
-      let id = user.uid;
-
+    create(dataUser){
+      let user = {
+        id: dataUser.uid,
+        name: dataUser.displayName,
+        photo: dataUser.photoURL,
+        progreso: {
+          arboles:{
+            html: 0, css:0, js:0,total:0
+          },
+          complete:{}
+        }
+      }
+      db.ref('Usuarios/' + user.id).set(user);
+      this.charge(user);
     }
   }
 };

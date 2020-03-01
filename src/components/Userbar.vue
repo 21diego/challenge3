@@ -1,11 +1,17 @@
 <template>
-  <div id="contenedor" class="d-flex align-items-center justify-content-between">
-    <div id="picture"></div>
+  <div id="contenedor" class="container d-flex align-items-center justify-content-between" v-if="user.name">
+    <img id="picture" :src="user.photo">
     <div id="username">
-      <h2>USER NAME</h2>
+      <h2>{{user.name}}</h2>
     </div>
     <div id="medal">
       <img src="@/assets/medal.png" alt="">
+    </div>
+  </div>
+  <div id="contenedor" class="container d-flex align-items-center justify-content-between" v-else>
+    <img id="picture" src="@/assets/account.png">
+    <div id="medal">
+      <button @click="routeLog" class="btn btn-success">Log in</button>
     </div>
   </div>
 </template>
@@ -16,6 +22,11 @@ import {mapState} from 'vuex'
     name: "Userbar",
     computed: {
       ...mapState(['user'])
+    },
+    methods:{
+      routeLog(){
+        this.$router.push({path: '/log'}).catch(err => {});
+      }
     }
   }
 
@@ -29,9 +40,9 @@ import {mapState} from 'vuex'
 }
 #picture{
   border-radius: 50%;
+  background-color: rgb(214, 231, 203);
   height: 60px;
   width: 60px;
-  border: 2px solid grey;
 }
 #medal{
   width: 70px

@@ -73,7 +73,7 @@
 
 <script>
 import {app} from "@/firebase";
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: 'Register',
@@ -88,24 +88,24 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['charge']),
     submit() {
       app.auth().createUserWithEmailAndPassword(this.form.email, this.form.password)
       .then(data => {
         data.user.updateProfile({
-        displayName: this.form.name
+        displayName: this.form.name,
+        photoURL: "https://i.ibb.co/61KpV89/account.png"
         })
+        this.$router.push({path: '/'}).catch(err => {});
       })
-      .then(data => {
-        this.$router.replace({ name: "Home" });
-        location.reload()
-      })
+      .then(data => {})
       .catch(err => {
         this.error = err.message;
       });
     }
   },
   computed:{
-    ...mapState(['registro'])
+    ...mapState(['registro','user'])
   }
   }
 </script>

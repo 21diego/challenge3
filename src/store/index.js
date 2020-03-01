@@ -24,8 +24,13 @@ export default new Vuex.Store({
     change(state){
       state.registro.account = !state.registro.account;
     },
-    preset(dataUser){
-
+    charge(state,userdb){
+      state.user = userdb;
+    },
+    startDB(state,database){
+      for(let element in database){
+        state[element] = database[element];
+      };
     }
   },
   actions: {
