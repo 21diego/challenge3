@@ -1,7 +1,7 @@
 <template>
   <div id="worldbox" class="container">
-    <h4 :id="category">{{category}}: {{user.progreso.arboles[cat]}}</h4>
-    <img class="world" :src="Temas[category].imgURL" alt="Temas[cat]-img">
+    <h4 :id="category">{{category.substr(2)}}: {{user.progreso.arboles[cat]}}</h4>
+    <img class="world" :src="Temas[category].imgWorld" alt="Temas[cat]-img">
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import {mapState,mapMutations} from 'vuex'
     props: ['category'],
     data(){
       return{
-        cat:this.category.toLowerCase()
+        cat:this.category.substr(2).toLowerCase()
       }
     },
     computed:{

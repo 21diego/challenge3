@@ -94,8 +94,14 @@ export default {
     mail() {    
       app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
       .then(data => {
-        
-        this.create(data.user)
+        let id = data.user.uid;
+        if(this.Usuarios != null && this.Usuarios[id] != null){
+          console.log("carga de datos")
+          this.charge(this.Usuarios[id]);
+        }else{
+          console.log("se creo de nuevo")
+          this.create(data.user);
+        }
         this.$router.push({path: '/'}).catch(err => {});
       })
       .catch(err => {
