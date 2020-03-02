@@ -33,6 +33,30 @@ import 'hooper/dist/hooper.css';
 .hooper{
   height: 85%;
 }
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.is-current div{
+  -webkit-animation: zoomIn 1s;
+  animation: zoomIn 1s;
+}
 #wrap{
   margin-top: 15%;
   height: 350px;
