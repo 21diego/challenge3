@@ -26,7 +26,12 @@ export default new Vuex.Store({
       state.registro.account = !state.registro.account;
     },
     charge(state,userdb){
+      window.localStorage.setItem('user',JSON.stringify(userdb));
       state.user = userdb;
+    },
+    reset(state){
+      window.localStorage.removeItem('user');
+      state.user = {}
     },
     startDB(state,database){
       for(let element in database){

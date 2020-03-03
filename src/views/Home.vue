@@ -2,9 +2,9 @@
   <div class="home">
     
     <Userbar></Userbar>
-
+    <div class="card">DEBE INICIAR SESION</div>
     <Contenedor></Contenedor>
-    <button @click="routePlay" class="btn btn-success">PLANTAR!</button>
+    <button @click="routeTopics" class="btn btn-success">PLANTAR!</button>
     <Navbar></Navbar>
   </div>
 </template>
@@ -23,9 +23,9 @@ export default {
   },
   methods:{
     ...mapMutations(['saveCat']),
-    routePlay(){
+    routeTopics(){
       this.saveCat(document.querySelector(".is-active>div>h4").getAttribute("id"));
-      this.$router.push({path: '/play'}).catch(err => {});
+      this.$router.push({path: '/topics'}).catch(err => {});
     }
   }
 }

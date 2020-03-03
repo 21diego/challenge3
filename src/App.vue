@@ -15,10 +15,17 @@ export default {
     Navbar
   },
   created(){
-      db.ref('/').on('value', snapshot => {this.startDB(snapshot.val())});
+    let user = JSON.parse(window.localStorage.getItem('user'));
+    if(user != null){
+      this.charge(user)
+    }
+    db.ref('/').on('value', snapshot => {this.startDB(snapshot.val())});
+  },
+  updated(){
+    db.ref('/').on('value', snapshot => {this.startDB(snapshot.val())});
   },
   methods:{
-    ...mapMutations(['startDB'])
+    ...mapMutations(['startDB','charge'])
   }
 }
 </script>

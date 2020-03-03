@@ -20,6 +20,13 @@
 </script>
 
 <style scoped>
+a{
+  height: 50px;
+  margin-top: 10px;
+}
+#nav{
+  background-color: white;
+}
   img {
     width: 35px;
   }
@@ -29,8 +36,6 @@
     }
   }
   .router-link-exact-active {
-    border-top: 2px solid red;
-    padding-bottom: 20px;
     transform: scale(1.8);
     animation: zoom .5s;
   }
