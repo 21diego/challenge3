@@ -2,14 +2,21 @@
   <div class="quiz">
     <h2 class="bg-html">{{($route.params.cat).substr(2)}}</h2>
 	  <p class="topic">{{($route.params.topic).substr(2).toUpperCase()}}</p>
-    <Questions :index="index" :theme="$route.params.topic" @answer="nextq($event)" v-if="index<=5"></Questions>
+    <Questions :index="index" :theme="$route.params.topic" @answer="activate($event)" v-if="index<=5"></Questions>
     
     <template v-if="index == 6">
       <h3>Respuestas</h3>
       <p>Correctas: {{count[0]}}</p>
       <p>Incorrectas: {{count[1]}}</p>
+      <p v-if="count[0] == 5">Felicidades! Completaste {{($route.params.topic).substr(2).toUpperCase()}}</p>
+      <p v-else>Revisa la teoria! <span @click="gotoStudy">Click aqui!</span></p>
+      <div class="box d-flex justify-content-between">
+        <button class="btn btn-primary" @click="routeTopic">Volver</button>
+        <button class="btn btn-primary">nose</button>
+      </div>
+      
     </template>
-    <button @click="nextq">{{next}}</button>
+    
   </div>
   
 </template>
@@ -30,7 +37,13 @@ export default {
     Questions
   },
   methods:{
-	nextq(ok){
+    activate(ok){
+      //Retrasa la funcion una cierta cantidad de tiempo
+      var startTime = new Date().getTime();
+      while (new Date().getTime() < startTime + 1000){}
+      this.nextq(ok);
+    },
+  nextq(ok){
     let button = document.querySelectorAll('.btn')
      if(this.index==5){
        this.next="Menú"       
@@ -46,6 +59,12 @@ export default {
       this.index++       
      }
      button.forEach(e=>e.classList.add('btn-quiz','btn-secondary'));
+   },
+   routeTopic(){
+     this.$router.push({path: '/topics'})
+   },
+   gotoStudy(){
+     this.$router.push({path: '/study/'+this.$route.params.cat+'/'+this.$route.params.topic})
    }
 
   }
@@ -62,5 +81,9 @@ export default {
 }
 .btn-quiz{
 	margin-bottom: 1em;
+}
+.box{
+  width: 50%;
+  margin: 0 auto;
 }
 </style>
